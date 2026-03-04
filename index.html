@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fisioterapia Ganzerli — San Marino | Studio Fisioterapico & Osteopatico</title>
+  <meta name="description" content="Fisioterapia Ganzerli a Borgo Maggiore, San Marino. Fisioterapia, osteopatia, tecnologie avanzate e Centro Benessere. Prenota la tua valutazione gratuita." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── RESET & VARIABLES ──────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:       #0A7C8C;
+      --teal-light: #12A3B8;
+      --teal-pale:  #E8F6F8;
+      --teal-mid:   #B2E0E8;
+      --sage:       #6B8F71;
+      --dark:       #121820;
+      --charcoal:   #2C3440;
+      --warm:       #F5F0EA;
+      --off-white:  #FAFAFA;
+      --gold:       #C9A84C;
+      --text:       #2C3440;
+      --muted:      #7A8694;
+      --border:     #DDE4E8;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+      --radius:     12px;
+      --shadow:     0 4px 24px rgba(10, 124, 140, 0.10);
+      --shadow-lg:  0 12px 48px rgba(10, 124, 140, 0.16);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--off-white);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── STICKY BAR ─────────────────────────────────────── */
+    .sticky-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--dark);
+      display: flex; align-items: center; justify-content: center; gap: 2rem;
+      padding: 0.55rem 1rem;
+      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.75);
+    }
+    .sticky-bar a {
+      color: var(--teal-light); font-weight: 600;
+      transition: color .2s;
+    }
+    .sticky-bar a:hover { color: #fff; }
+    .sticky-bar .sep { opacity: 0.3; }
+
+    /* ─── NAV ────────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 32px; z-index: 90;
+      background: rgba(250,250,250,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--teal);
+      letter-spacing: -0.01em;
+    }
+    .nav-logo span { color: var(--charcoal); font-weight: 400; font-style: italic; }
+    .nav-links { display: flex; gap: 2rem; font-size: 0.85rem; font-weight: 500; color: var(--muted); }
+    .nav-links a:hover { color: var(--teal); }
+    .nav-cta {
+      background: var(--teal); color: #fff !important;
+      padding: 0.55rem 1.3rem; border-radius: 50px;
+      font-size: 0.82rem; font-weight: 600;
+      transition: background .2s, transform .15s;
+    }
+    .nav-cta:hover { background: var(--teal-light); transform: translateY(-1px); }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    .hero {
+      margin-top: 0;
+      min-height: 92vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 80px 5vw 60px;
+      gap: 4rem;
+      background: var(--warm);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -40%; right: -10%; width: 70%; height: 140%;
+      background: radial-gradient(ellipse at center, rgba(10,124,140,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--teal-mid), transparent);
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(10,124,140,0.10); border: 1px solid rgba(10,124,140,0.25);
+      border-radius: 50px; padding: 0.35rem 0.9rem;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
+      color: var(--teal); text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero-badge::before { content: '●'; font-size: 0.5rem; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-weight: 900; line-height: 1.08;
+      color: var(--dark);
+      margin-bottom: 1rem;
+    }
+    .hero h1 em {
+      font-style: italic; color: var(--teal);
+      display: block;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem; color: var(--muted); line-height: 1.7;
+      max-width: 520px; margin-bottom: 2rem;
+    }
+
+    .hero-lead {
+      font-size: 0.9rem; color: var(--charcoal);
+      border-left: 3px solid var(--teal);
+      padding-left: 1rem; margin-bottom: 2.5rem;
+      line-height: 1.7; max-width: 500px;
+    }
+
+    .hero-cta-group { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--teal); color: #fff;
+      padding: 0.9rem 2rem; border-radius: 50px;
+      font-weight: 600; font-size: 0.95rem;
+      transition: all .2s; box-shadow: 0 4px 16px rgba(10,124,140,0.3);
+    }
+    .btn-primary:hover { background: var(--teal-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(10,124,140,0.4); }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--teal); font-weight: 600; font-size: 0.9rem;
+      border-bottom: 2px solid var(--teal-mid);
+      padding-bottom: 2px;
+      transition: border-color .2s;
+    }
+    .btn-secondary:hover { border-color: var(--teal); }
+
+    .hero-trust {
+      display: flex; gap: 1.5rem; margin-top: 2rem;
+      font-size: 0.78rem; color: var(--muted);
+    }
+    .hero-trust-item { display: flex; align-items: center; gap: 0.4rem; }
+    .hero-trust-item::before { font-size: 0.9rem; }
+
+    /* HERO IMAGE SIDE */
+    .hero-visual {
+      position: relative; display: flex; justify-content: center; align-items: center;
+    }
+    .hero-img-wrap {
+      width: 100%; max-width: 520px;
+      aspect-ratio: 4/5;
+      border-radius: 32px;
+      background: linear-gradient(145deg, #C8E8ED 0%, #A0D4DC 40%, #7BBFC9 100%);
+      overflow: hidden; position: relative;
+      box-shadow: var(--shadow-lg);
+    }
+    .hero-img-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1rem; padding: 2rem; text-align: center;
+    }
+    .hero-img-placeholder .icon { font-size: 4rem; opacity: 0.6; }
+    .hero-img-placeholder p {
+      font-size: 0.78rem; color: rgba(18,24,32,0.5);
+      max-width: 240px; line-height: 1.5; font-style: italic;
+    }
+    .hero-img-placeholder strong {
+      display: block; font-size: 0.65rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--teal); margin-bottom: 0.3rem;
+    }
+
+    .hero-badge-float {
+      position: absolute; bottom: -16px; left: -16px;
+      background: #fff; border-radius: 16px;
+      padding: 0.8rem 1.2rem; box-shadow: var(--shadow-lg);
+      display: flex; align-items: center; gap: 0.7rem;
+    }
+    .hero-badge-float .num {
+      font-family: var(--font-display);
+      font-size: 1.8rem; font-weight: 900; color: var(--teal); line-height: 1;
+    }
+    .hero-badge-float .label { font-size: 0.7rem; color: var(--muted); line-height: 1.3; }
+
+    .hero-badge-float2 {
+      position: absolute; top: 20px; right: -16px;
+      background: var(--teal); color: #fff;
+      border-radius: 12px; padding: 0.7rem 1rem;
+      box-shadow: var(--shadow); text-align: center;
+      font-size: 0.72rem; font-weight: 600;
+      line-height: 1.4;
+    }
+
+    /* ─── LOGOS / TECNOLOGIE ─────────────────────────────── */
+    .tech-strip {
+      background: var(--dark);
+      padding: 1.4rem 5vw;
+      display: flex; align-items: center; gap: 1rem;
+      overflow-x: auto;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .tech-strip-label {
+      font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.35); white-space: nowrap; margin-right: 1rem;
+    }
+    .tech-tag {
+      border: 1px solid rgba(255,255,255,0.15); border-radius: 50px;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em;
+      color: var(--teal-light); white-space: nowrap;
+    }
+
+    /* ─── SECTION BASE ───────────────────────────────────── */
+    section { padding: 80px 5vw; }
+    .section-label {
+      font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--teal); font-weight: 700; margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700; line-height: 1.2;
+      color: var(--dark); margin-bottom: 0.8rem;
+    }
+    .section-title em { font-style: italic; color: var(--teal); }
+    .section-lead {
+      font-size: 1rem; color: var(--muted); max-width: 560px; line-height: 1.7;
+    }
+    .section-header { margin-bottom: 3.5rem; }
+
+    /* ─── BENEFITS ───────────────────────────────────────── */
+    .benefits { background: var(--off-white); }
+    .benefits-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .benefit-card {
+      background: #fff; border-radius: var(--radius);
+      padding: 2rem; border: 1px solid var(--border);
+      transition: box-shadow .25s, transform .25s;
+      position: relative; overflow: hidden;
+    }
+    .benefit-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--teal-light));
+      opacity: 0; transition: opacity .25s;
+    }
+    .benefit-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .benefit-card:hover::before { opacity: 1; }
+    .benefit-icon {
+      width: 48px; height: 48px;
+      background: var(--teal-pale); border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 1.2rem;
+    }
+    .benefit-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--dark); margin-bottom: 0.6rem; line-height: 1.3;
+    }
+    .benefit-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+
+    .benefit-card.featured {
+      background: var(--teal); border-color: var(--teal);
+    }
+    .benefit-card.featured h3, .benefit-card.featured p { color: #fff; }
+    .benefit-card.featured .benefit-icon { background: rgba(255,255,255,0.15); }
+    .benefit-card.featured p { opacity: 0.85; }
+
+    /* ─── SEZIONE CTA MID ────────────────────────────────── */
+    .cta-mid {
+      background: linear-gradient(135deg, var(--teal) 0%, #0D6B7A 100%);
+      padding: 60px 5vw;
+      text-align: center;
+    }
+    .cta-mid h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: #fff; margin-bottom: 0.7rem; font-weight: 700;
+    }
+    .cta-mid p { color: rgba(255,255,255,0.75); margin-bottom: 2rem; font-size: 0.95rem; }
+    .cta-mid .btn-white {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: #fff; color: var(--teal);
+      padding: 0.9rem 2.2rem; border-radius: 50px;
+      font-weight: 700; font-size: 0.95rem;
+      transition: all .2s; box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+    .cta-mid .btn-white:hover { background: var(--warm); transform: translateY(-2px); }
+    .cta-mid-note { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 1rem; }
+
+    /* ─── TESTIMONIALS ───────────────────────────────────── */
+    .testimonials { background: var(--warm); }
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .review-card {
+      background: #fff; border-radius: var(--radius);
+      padding: 2rem; border: 1px solid var(--border);
+      position: relative;
+    }
+    .review-card::before {
+      content: '"';
+      font-family: var(--font-display);
+      font-size: 5rem; color: var(--teal-pale);
+      position: absolute; top: -10px; right: 20px;
+      line-height: 1; pointer-events: none;
+    }
+    .stars { color: #F5A623; font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 2px; }
+    .review-text {
+      font-size: 0.9rem; color: var(--charcoal);
+      line-height: 1.75; margin-bottom: 1.3rem;
+      font-style: italic;
+    }
+    .reviewer { display: flex; align-items: center; gap: 0.8rem; }
+    .reviewer-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--teal-pale);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .reviewer-name { font-weight: 700; font-size: 0.88rem; color: var(--dark); }
+    .reviewer-role { font-size: 0.75rem; color: var(--muted); }
+
+    /* ─── STORYTELLING ───────────────────────────────────── */
+    .story { background: var(--off-white); }
+    .story-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+    }
+    .story-visual {
+      position: relative;
+    }
+    .story-img-wrap {
+      aspect-ratio: 3/4;
+      border-radius: 24px;
+      background: linear-gradient(160deg, var(--teal-pale), var(--teal-mid));
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .story-img-placeholder {
+      text-align: center; padding: 2rem;
+    }
+    .story-img-placeholder .icon { font-size: 3.5rem; margin-bottom: 1rem; opacity: 0.5; }
+    .story-img-placeholder p { font-size: 0.72rem; color: rgba(18,24,32,0.4); font-style: italic; }
+    .story-year-badge {
+      position: absolute; bottom: -16px; right: -16px;
+      background: var(--dark); color: #fff;
+      border-radius: 16px; padding: 1rem 1.3rem;
+      box-shadow: var(--shadow-lg);
+    }
+    .story-year-badge .yr {
+      font-family: var(--font-display);
+      font-size: 2rem; font-weight: 900; color: var(--teal-light); line-height: 1;
+    }
+    .story-year-badge .yr-label { font-size: 0.65rem; color: rgba(255,255,255,0.5); letter-spacing: 0.08em; }
+
+    .story-content { }
+    .story-content p {
+      font-size: 0.95rem; color: var(--charcoal);
+      line-height: 1.8; margin-bottom: 1.2rem;
+    }
+    .story-content strong { color: var(--teal); }
+    .story-content .final-line {
+      font-family: var(--font-display);
+      font-size: 1.2rem; font-style: italic;
+      color: var(--dark); border-left: 4px solid var(--teal);
+      padding-left: 1.2rem; margin-top: 2rem;
+      line-height: 1.5;
+    }
+
+    /* ─── GARANZIA ───────────────────────────────────────── */
+    .garanzia { background: var(--dark); }
+    .garanzia .section-label { color: var(--teal-light); }
+    .garanzia .section-title { color: #fff; }
+    .garanzia .section-lead { color: rgba(255,255,255,0.55); }
+    .guarantee-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.2rem; margin-top: 3rem;
+    }
+    .guarantee-item {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius); padding: 1.6rem;
+      background: rgba(255,255,255,0.03);
+      transition: background .2s;
+    }
+    .guarantee-item:hover { background: rgba(10,124,140,0.12); }
+    .guarantee-check {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(10,124,140,0.25); border: 1px solid var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; margin-bottom: 1rem; color: var(--teal-light);
+    }
+    .guarantee-item h4 {
+      font-weight: 700; font-size: 0.9rem; color: #fff; margin-bottom: 0.5rem;
+    }
+    .guarantee-item p { font-size: 0.82rem; color: rgba(255,255,255,0.45); line-height: 1.65; }
+
+    /* ─── FOOTER CTA ─────────────────────────────────────── */
+    .footer-cta {
+      background: var(--warm); padding: 80px 5vw;
+      text-align: center;
+    }
+    .footer-cta h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900; color: var(--dark); line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .footer-cta h2 em { font-style: italic; color: var(--teal); }
+    .footer-cta-sub { color: var(--muted); margin-bottom: 2.5rem; font-size: 1rem; }
+    .contact-grid {
+      display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+    .contact-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.2rem 2rem;
+      display: flex; align-items: center; gap: 0.8rem;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .contact-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+    .contact-card .ico { font-size: 1.5rem; }
+    .contact-card .ct-label { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .contact-card .ct-val { font-weight: 700; color: var(--teal); font-size: 1rem; }
+    .footer-note { font-size: 0.78rem; color: var(--muted); }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      background: var(--dark); padding: 2rem 5vw;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1rem; font-weight: 700; color: var(--teal-light);
+    }
+    footer p { font-size: 0.72rem; color: rgba(255,255,255,0.3); }
+
+    /* ─── SCROLL ANIMATIONS ──────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; padding: 60px 5vw 40px; gap: 2.5rem; }
+      .hero-visual { order: -1; }
+      .hero-img-wrap { max-width: 100%; aspect-ratio: 16/9; border-radius: 20px; }
+      .story-inner { grid-template-columns: 1fr; }
+      .story-visual { display: none; }
+      nav { padding: 0 4vw; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .sticky-bar .sep, .sticky-bar span:first-child { display: none; }
+      section { padding: 60px 5vw; }
+      .hero h1 { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ STICKY BAR ═══════════════════════════════════════ -->
+  <div class="sticky-bar">
+    <span>📍 Borgo Maggiore, San Marino</span>
+    <span class="sep">|</span>
+    <a href="tel:0549992952">📞 0549 992952</a>
+    <span class="sep">|</span>
+    <a href="mailto:info@fisioterapiaganzerli.com">✉ info@fisioterapiaganzerli.com</a>
+  </div>
+
+  <!-- ═══ NAV ══════════════════════════════════════════════ -->
+  <nav>
+    <div class="nav-logo">Fisioterapia Ganzerli <span>· San Marino</span></div>
+    <div class="nav-links">
+      <a href="#benefits">Servizi</a>
+      <a href="#story">Chi siamo</a>
+      <a href="#reviews">Testimonianze</a>
+      <a href="#garanzia">Garanzia</a>
+    </div>
+    <a href="tel:0549992952" class="nav-links nav-cta">Prenota ora</a>
+  </nav>
+
+  <!-- ═══ HERO ═════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Studio Fisioterapico &amp; Osteopatico dal 1994</div>
+
+      <h1>
+        Smetti di convivere<br>con il dolore.
+        <em>Ritrova il movimento,<br>riprendi la tua vita.</em>
+      </h1>
+
+      <p class="hero-sub">
+        A Fisioterapia Ganzerli curiamo molto più di un sintomo: ti accompagniamo verso un benessere autentico e duraturo, con un approccio che unisce fisioterapia avanzata, osteopatia e cura globale della persona.
+      </p>
+
+      <p class="hero-lead">
+        Che tu stia affrontando un dolore acuto alla schiena, recuperando da un intervento chirurgico, o voglia rimettere in moto il tuo corpo: sei nel posto giusto. Dal 1994, migliaia di persone a San Marino hanno ritrovato il benessere con noi.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="tel:0549992952" class="btn-primary">📞 Prenota la tua valutazione gratuita</a>
+        <a href="#benefits" class="btn-secondary">Scopri i nostri servizi →</a>
+      </div>
+
+      <div class="hero-trust">
+        <div class="hero-trust-item">✅ Prima valutazione gratuita</div>
+        <div class="hero-trust-item">✅ Staff certificato</div>
+        <div class="hero-trust-item">✅ +30 anni di esperienza</div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-img-wrap">
+        <div class="hero-img-placeholder">
+          <div class="icon">🩺</div>
+          <p>
+            <strong>Hero Image — Prompt per il designer</strong>
+            Fisioterapista in camice bianco che lavora con cura su un paziente disteso su un lettino, luce naturale calda, ambiente moderno e sereno. Palette: bianco, azzurro chiaro, verde salvia.
+          </p>
+        </div>
+      </div>
+
+      <div class="hero-badge-float">
+        <div class="num">30+</div>
+        <div class="label">anni al servizio<br>della salute</div>
+      </div>
+
+      <div class="hero-badge-float2">
+        ⭐ 5/5<br><small>su Google Reviews</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TECH STRIP ════════════════════════════════════════ -->
+  <div class="tech-strip">
+    <span class="tech-strip-label">Tecnologie utilizzate</span>
+    <span class="tech-tag">Tecar Terapia</span>
+    <span class="tech-tag">Laser CO₂</span>
+    <span class="tech-tag">Laser Neodimio YAG</span>
+    <span class="tech-tag">Onde d'Urto</span>
+    <span class="tech-tag">Horizontal Therapy</span>
+    <span class="tech-tag">Osteopatia</span>
+    <span class="tech-tag">Centro Benessere Mary</span>
+  </div>
+
+  <!-- ═══ BENEFITS ══════════════════════════════════════════ -->
+  <section class="benefits" id="benefits">
+    <div class="section-header reveal">
+      <div class="section-label">I tuoi vantaggi</div>
+      <h2 class="section-title">Perché scegliere<br><em>Fisioterapia Ganzerli?</em></h2>
+      <p class="section-lead">Ci sono centinaia di studi fisioterapici. Ce n'è uno solo che ti offre tutto questo in un unico posto, a San Marino.</p>
+    </div>
+
+    <div class="benefits-grid">
+      <div class="benefit-card reveal reveal-delay-1">
+        <div class="benefit-icon">🎯</div>
+        <h3>Un piano costruito su di te — e solo su di te</h3>
+        <p>Non esiste un protocollo standard. Dopo una valutazione approfondita costruiamo un percorso che tiene conto della tua storia clinica, del tuo stile di vita e dei tuoi obiettivi reali.</p>
+      </div>
+
+      <div class="benefit-card featured reveal reveal-delay-2">
+        <div class="benefit-icon">⚡</div>
+        <h3>Tecnologie d'avanguardia che accelerano la guarigione</h3>
+        <p>Tecar, Laser CO₂, Laser Neodimio YAG, Onde d'Urto e Horizontal Therapy. Le usiamo perché riducono i tempi di recupero e trattano in profondità ciò che le sole mani non raggiungono.</p>
+      </div>
+
+      <div class="benefit-card reveal reveal-delay-3">
+        <div class="benefit-icon">🤝</div>
+        <h3>Fisioterapia + Osteopatia: il corpo come sistema unico</h3>
+        <p>Il dolore alla spalla può avere origine nel bacino. Il nostro approccio integra fisioterapia riabilitativa e osteopatia per trattare la causa, non solo il sintomo che percepisci.</p>
+      </div>
+
+      <div class="benefit-card reveal reveal-delay-1">
+        <div class="benefit-icon">🌿</div>
+        <h3>Centro Benessere Mary: il recupero inizia anche dalla mente</h3>
+        <p>La guarigione non è solo fisica. Il Centro Benessere Mary offre massaggi, trattamenti estetici e percorsi di relax psico-fisico: salute globale, non solo assenza di dolore.</p>
+      </div>
+
+      <div class="benefit-card reveal reveal-delay-2">
+        <div class="benefit-icon">🏅</div>
+        <h3>Decenni di esperienza, aggiornamento continuo</h3>
+        <p>Lavoriamo in questo territorio da oltre trent'anni. Conosciamo i nostri pazienti e le loro vite. E ci aggiorniamo ogni anno, perché i nostri pazienti meritano sempre il meglio che la scienza offre.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA MID ═══════════════════════════════════════════ -->
+  <div class="cta-mid reveal">
+    <h2>Non aspettare che il dolore peggiori.</h2>
+    <p>La prima valutazione posturale è gratuita e senza impegno. Chiamaci oggi.</p>
+    <a href="tel:0549992952" class="btn-white">📞 Chiama ora: 0549 992952</a>
+    <p class="cta-mid-note">Oppure scrivi a <a href="mailto:info@fisioterapiaganzerli.com" style="color:rgba(255,255,255,0.6)">info@fisioterapiaganzerli.com</a> · Risposta entro 24 ore</p>
+  </div>
+
+  <!-- ═══ TESTIMONIALS ══════════════════════════════════════ -->
+  <section class="testimonials" id="reviews">
+    <div class="section-header reveal">
+      <div class="section-label">Riprova sociale</div>
+      <h2 class="section-title">Cosa dicono i<br><em>nostri pazienti</em></h2>
+      <p class="section-lead">Non sono parole nostre. Sono le storie di chi ha scelto di affidarsi a noi — e ha ritrovato quello che aveva perso.</p>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-card reveal reveal-delay-1">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">
+          Mi sono strappato il legamento crociato anteriore durante una gara. I medici mi avevano detto sei mesi di stop. Con il percorso riabilitativo di Fisioterapia Ganzerli ho ripreso a pedalare in quattro mesi. Ogni seduta era diversa dalla precedente: sentivo i progressi giorno dopo giorno. Ora sono tornato in sella, più consapevole del mio corpo di prima.
+        </p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">🚴</div>
+          <div>
+            <div class="reviewer-name">Marco T., 34 anni</div>
+            <div class="reviewer-role">Ciclista amatoriale · Domagnano</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card reveal reveal-delay-2">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">
+          Convivevo con dolori alla schiena da oltre dieci anni. Qui hanno fatto una valutazione completa e capito subito che c'era una componente osteopatica mai trattata. Dopo poche settimane di terapia combinata, ho smesso di prendere antidolorifici ogni sera. Mi sento rinata. Lo consiglio a chiunque non si rassegni al dolore cronico.
+        </p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">🌸</div>
+          <div>
+            <div class="reviewer-name">Carla M., 67 anni</div>
+            <div class="reviewer-role">Pensionata · Serravalle</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card reveal reveal-delay-3">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">
+          Otto ore al giorno davanti al computer avevano fatto danni seri: cervicale, spalle tese e una cefalea quasi quotidiana. Dopo un mese con la Tecar e le sedute di osteopatia, le emicranie sono diminuite dell'80%. Ora seguo anche i consigli posturali che mi hanno dato. Finalmente lavoro senza arrivare a casa distrutto.
+        </p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">💼</div>
+          <div>
+            <div class="reviewer-name">Luca B., 47 anni</div>
+            <div class="reviewer-role">Impiegato · Borgo Maggiore</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:2.5rem;" class="reveal">
+      <a href="tel:0549992952" class="btn-primary">→ Anch'io voglio stare meglio — prenota ora</a>
+    </div>
+  </section>
+
+  <!-- ═══ STORYTELLING ══════════════════════════════════════ -->
+  <section class="story" id="story">
+    <div class="story-inner">
+      <div class="story-visual reveal">
+        <div class="story-img-wrap">
+          <div class="story-img-placeholder">
+            <div class="icon">🏥</div>
+            <p><em>Immagine dello studio / team — inserire foto reale</em></p>
+          </div>
+        </div>
+        <div class="story-year-badge">
+          <div class="yr">1994</div>
+          <div class="yr-label">Anno di fondazione</div>
+        </div>
+      </div>
+
+      <div class="story-content reveal reveal-delay-2">
+        <div class="section-label">La nostra storia</div>
+        <h2 class="section-title">Trent'anni di cura.<br><em>Una missione invariata.</em></h2>
+
+        <p>Fisioterapia Ganzerli nasce a San Marino più di trent'anni fa, da una convinzione semplice e profonda: ogni persona che soffre merita non solo una cura tecnica, ma un'attenzione vera, umana, intera.</p>
+
+        <p>Nel corso degli anni, quello che era uno studio fisioterapico tradizionale si è trasformato in qualcosa di più completo. Abbiamo accolto l'osteopatia, perché ci ha insegnato a guardare il corpo come un sistema in cui tutto è connesso. Abbiamo investito in tecnologie sempre più avanzate, perché la scienza ci ha dato strumenti capaci di fare ciò che prima non era possibile.</p>
+
+        <p>Abbiamo aperto il <strong>Centro Benessere Mary</strong>, perché ascoltando i nostri pazienti abbiamo capito che il benessere reale non si misura solo con l'assenza di dolore, ma con la qualità della vita nel suo insieme.</p>
+
+        <p class="final-line">Questa è Fisioterapia Ganzerli. Non solo riabilitazione. Cura, nel senso più pieno della parola.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ GARANZIA ══════════════════════════════════════════ -->
+  <section class="garanzia" id="garanzia">
+    <div class="section-header reveal">
+      <div class="section-label">La nostra garanzia</div>
+      <h2 class="section-title">Il tuo percorso, senza sorprese.<br><em>Il nostro impegno scritto nel metodo.</em></h2>
+      <p class="section-lead">Sappiamo che affidarsi a uno studio richiede fiducia. Ecco perché vogliamo essere trasparenti su quello che puoi aspettarti da noi, fin dal primo giorno.</p>
+    </div>
+
+    <div class="guarantee-grid">
+      <div class="guarantee-item reveal reveal-delay-1">
+        <div class="guarantee-check">✓</div>
+        <h4>Prima valutazione posturale gratuita</h4>
+        <p>Prima di qualsiasi trattamento, ogni paziente riceve una valutazione approfondita. Ascoltiamo la tua storia, analizziamo la postura, valutiamo il tuo schema di movimento. È la fondamenta su cui costruiamo tutto il resto.</p>
+      </div>
+      <div class="guarantee-item reveal reveal-delay-2">
+        <div class="guarantee-check">✓</div>
+        <h4>Piano terapeutico personalizzato e spiegato</h4>
+        <p>Dopo la valutazione ricevi un piano chiaro: cosa faremo, perché, per quanto tempo e quali risultati attendere realisticamente. Nessuna vaghezza, nessuna promessa impossibile. Solo onestà professionale.</p>
+      </div>
+      <div class="guarantee-item reveal reveal-delay-3">
+        <div class="guarantee-check">✓</div>
+        <h4>Staff certificato e in costante aggiornamento</h4>
+        <p>Il nostro team partecipa ogni anno a corsi di formazione avanzata in Italia e all'estero. Le certificazioni non sono decorazioni sul muro: garantiscono che stai ricevendo cure aggiornate agli standard più recenti.</p>
+      </div>
+      <div class="guarantee-item reveal reveal-delay-1">
+        <div class="guarantee-check">✓</div>
+        <h4>Percorso adattabile e monitorato</h4>
+        <p>Il tuo corpo cambia nel tempo. Il piano terapeutico si adatta con te: monitoriamo i progressi a ogni seduta e aggiustiamo il percorso se qualcosa non va come previsto.</p>
+      </div>
+      <div class="guarantee-item reveal reveal-delay-2">
+        <div class="guarantee-check">✓</div>
+        <h4>Totale trasparenza sui costi</h4>
+        <p>Prima di iniziare qualsiasi percorso, ricevi tutte le informazioni economiche. Nessuna sorpresa in fattura, mai.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER CTA ═════════════════════════════════════════ -->
+  <section class="footer-cta reveal">
+    <h2>Il primo passo verso una vita<br><em>senza dolore</em> è più semplice di quanto pensi.</h2>
+    <p class="footer-cta-sub">Contattaci oggi. La prima valutazione è gratuita e senza impegno.</p>
+
+    <div class="contact-grid">
+      <a href="tel:0549992952" class="contact-card">
+        <span class="ico">📞</span>
+        <div>
+          <div class="ct-label">Chiama ora</div>
+          <div class="ct-val">0549 992952</div>
+        </div>
+      </a>
+      <a href="mailto:info@fisioterapiaganzerli.com" class="contact-card">
+        <span class="ico">✉️</span>
+        <div>
+          <div class="ct-label">Scrivi una email</div>
+          <div class="ct-val">info@fisioterapiaganzerli.com</div>
+        </div>
+      </a>
+      <div class="contact-card">
+        <span class="ico">📍</span>
+        <div>
+          <div class="ct-label">Dove siamo</div>
+          <div class="ct-val">Borgo Maggiore, San Marino</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="footer-note">Risponderemo entro 24 ore · Lunedì–Venerdì su appuntamento</p>
+  </section>
+
+  <!-- ═══ FOOTER ════════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-logo">Fisioterapia Ganzerli</div>
+    <p>© 2025 Fisioterapia Ganzerli · Borgo Maggiore, Repubblica di San Marino</p>
+    <p>P.IVA / CF: [inserire] · Tutti i diritti riservati</p>
+  </footer>
+
+  <!-- ═══ JS — Scroll reveal ════════════════════════════════ -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
